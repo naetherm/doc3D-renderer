@@ -22,9 +22,9 @@ import string
 
 def select_object(ob):
     bpy.ops.object.select_all(action='DESELECT')
-    bpy.context.scene.objects.active = None
-    ob.select=True
-    bpy.context.scene.objects.active = ob
+    bpy.context.view_layer.objects.active = None
+    ob.select_set(state=True)
+    bpy.context.view_layer.objects.active = ob
 
 
 def render():
@@ -38,8 +38,8 @@ def render():
 
 def prepare_no_env_render():
     # Remove lamp
-    for lamp in bpy.data.lamps:
-        bpy.data.lamps.remove(lamp, do_unlink=True)
+    for lamp in bpy.data.lights:
+        bpy.data.lights.remove(lamp, do_unlink=True)
 
     world=bpy.data.worlds['World']
     world.use_nodes = True
@@ -50,7 +50,7 @@ def prepare_no_env_render():
     scene=bpy.data.scenes['Scene']
     scene.cycles.samples=1
     scene.cycles.use_square_samples=True
-    scene.view_settings.view_transform='Default'
+    scene.view_settings.view_transform='Standard'
 
 
 def get_depth_map(img_name):

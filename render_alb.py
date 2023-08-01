@@ -46,7 +46,7 @@ def render():
 
 def get_albedo_img(img_name):
     scene=bpy.data.scenes['Scene']
-    scene.render.layers['RenderLayer'].use_pass_diffuse_color=True
+    scene.view_layers['ViewLayer'].use_pass_diffuse_color=True
     bpy.context.scene.use_nodes = True
     tree = bpy.context.scene.node_tree
     links = tree.links
@@ -67,13 +67,13 @@ def get_albedo_img(img_name):
 	
     file_output_node.base_path = out_path
     file_output_node.file_slots[0].path = img_name
-    links.new(render_layers.outputs[21], file_output_node.inputs[0])
-    links.new(render_layers.outputs[21], comp_node.inputs[0])
+    links.new(render_layers.outputs[3], file_output_node.inputs[0]) # 21
+    links.new(render_layers.outputs[3], comp_node.inputs[0]) # 21
 
 def prepare_no_env_render():
     # Remove lamp
-    for lamp in bpy.data.lamps:
-        bpy.data.lamps.remove(lamp, do_unlink=True)
+    for lamp in bpy.data.lights:
+        bpy.data.lights.remove(lamp, do_unlink=True)
 
     world=bpy.data.worlds['World']
     world.use_nodes = True
@@ -82,7 +82,7 @@ def prepare_no_env_render():
     for l in links:
         links.remove(l)
     scene=bpy.data.scenes['Scene']
-    scene.view_settings.view_transform='Default'
+    scene.view_settings.view_transform='Standard'
 
 
 rridx=sys.argv[-3]
