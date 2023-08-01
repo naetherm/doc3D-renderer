@@ -348,7 +348,7 @@ def get_worldcoord_img(img_name):
     render_layers = tree.nodes.new('CompositorNodeRLayers')
 
     file_output_node_0 = tree.nodes.new("CompositorNodeOutputFile")
-    file_output_node_0.format.file_format = 'PNG' # OPEN_EXR
+    file_output_node_0.format.file_format = 'OPEN_EXR'
     file_output_node_0.base_path = path_to_output_wc
     file_output_node_0.file_slots[0].path = img_name
 
@@ -412,7 +412,7 @@ def render_pass(obj, objpath, texpath):
 
     # render 
     file_output_node_uv = tree.nodes.new('CompositorNodeOutputFile')
-    file_output_node_uv.format.file_format = 'PNG' # OPEN_EXR
+    file_output_node_uv.format.file_format = 'OPEN_EXR'
     file_output_node_uv.base_path = path_to_output_uv
     file_output_node_uv.file_slots[0].path = fn
     uvlk = links.new(render_layers.outputs[2], file_output_node_uv.inputs[0])

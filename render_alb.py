@@ -67,8 +67,8 @@ def get_albedo_img(img_name):
 	
     file_output_node.base_path = out_path
     file_output_node.file_slots[0].path = img_name
-    links.new(render_layers.outputs[3], file_output_node.inputs[0]) # 21
-    links.new(render_layers.outputs[3], comp_node.inputs[0]) # 21
+    links.new(render_layers.outputs[3], file_output_node.inputs[0])
+    links.new(render_layers.outputs[3], comp_node.inputs[0])
 
 def prepare_no_env_render():
     # Remove lamp
