@@ -56,6 +56,8 @@ def prepare_no_env_render():
 def get_depth_map(img_name):
     # no normalization or inversion use true z
     bpy.context.scene.camera = bpy.data.objects['Camera']
+    scene=bpy.data.scenes['Scene']
+    scene.view_layers['ViewLayer'].use_pass_z=True
     bpy.context.scene.use_nodes = True
     tree = bpy.context.scene.node_tree
     links = tree.links
